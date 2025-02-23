@@ -1,4 +1,6 @@
 /* Copyright (c) 1992 AT&T - All rights reserved. */
+#include <unistd.h>
+#include <stdlib.h>
 #include <libc.h>
 #include <libg.h>
 #include <stdio.h>
@@ -127,6 +129,11 @@ ioerr(Display *d)
 	return 0;
 }
 
+static int xerr(Display *d, XErrorEvent *err)
+{
+    return ioerr(d);
+}
+
 void
 xtbinit(Errfunc f, char *class, int *pargc, char **argv, char **fallbacks)
 {
@@ -174,7 +181,7 @@ xtbinit(Errfunc f, char *class, int *pargc, char **argv, char **fallbacks)
 	XtSetArg(args[n], XtNcomposeMod, &compose);	n++;
 	XtGetValues(widg, args, n);
 	XSetIOErrorHandler(ioerr);
-	XSetErrorHandler(ioerr);
+	XSetErrorHandler(xerr);
 
 	if (compose < 0 || compose > 5) {
 		n = 0;

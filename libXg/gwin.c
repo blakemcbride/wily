@@ -16,6 +16,8 @@
 
 #include "GwinP.h"
 
+extern long unicode(), latin1();
+
 /* Forward declarations */
 static void Realize(Widget, XtValueMask *, XSetWindowAttributes *);
 static void Resize(Widget);

@@ -1,4 +1,5 @@
 /* Copyright (c) 1992 AT&T - All rights reserved. */
+#include <stdlib.h>
 #include <libc.h>
 #include <libg.h>
 #include "libgint.h"
@@ -133,7 +134,7 @@ gsetline(Point *pp0, Point *pp1, Linedesc *l)
  */
 
 static
-code(Point *p, Rectangle *r)
+int code(Point *p, Rectangle *r)
 {
 	return( (p->x<r->min.x? 1 : p->x>=r->max.x? 2 : 0) |
 		(p->y<r->min.y? 4 : p->y>=r->max.y? 8 : 0));
